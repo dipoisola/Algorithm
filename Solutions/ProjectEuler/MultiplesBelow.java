@@ -1,6 +1,6 @@
 PROJECTEULER1: Find the sum of all the multiples of 3 or 5 below 1000
 
-// BARE SOLUTION
+// MY BARE SOLUTION
 static int sumBelow1000 () {
     int sum = 0;
     
@@ -15,7 +15,7 @@ static int sumBelow1000 () {
 
 ---------------------------------------------------------------------------------------------
 
-// MORE MATHEMATICAL SOLUTION
+// MY (MORE MATHEMATICAL & CONFUSING) SOLUTION
 static int multiplesBelow (int maximum, int... x) {
     int sum = 0,
         // Prevent edge overflow when dividing
@@ -48,3 +48,23 @@ static int gcf(int x, int y) {
 static int lcm(int i, int j) {
     return (i * j) / gcf(i, j);
 }
+
+--------------------------------------------------------------------------------------------
+
+// THE SOLUTION
+// To get sum of numbers divisible by 3: 3+6+9.....999 = 3(1+2+3+...+333)
+// To get sum of numbers divisible by 5: 5+10+15.....995 = 5(1+2+3+...199)
+// As stated above, mathematically 1+2+3+....+k = k*(k+1)/2
+// Which means P(1+2+3+....+k) = P(k*(k+1)/2)
+// Hence:
+
+int target = 999;
+
+static int sumDivisibleBy(int divisor) {
+    int dividend = target / divisor;
+
+    // P(1+2+3+....+k) = P(k*(k+1)/2)
+    return divisor * (dividend * (dividend + 1)) / 2;
+}
+
+System.out.println(sumDivisibleBy(3) + sumDivisibleBy(5) - sumDivisibleBy(15))
